@@ -1,6 +1,5 @@
 
 <?php
-
 $host = getenv('DB_HOST');
 $dbname = getenv('DB_NAME');
 $username = getenv('DB_USER');
@@ -8,8 +7,9 @@ $password = getenv('DB_PASSWORD');
 $port = getenv('DB_PORT') ?: '3306';
 
 if (!$host || !$dbname || !$username || $password === false) {
+    error_log('Faltan variables de conexión en Railway.');
     http_response_code(500);
-    exit('Faltan variables de conexión en Railway.');
+    exit;
 }
 
 try {
@@ -27,5 +27,5 @@ try {
 } catch (PDOException $e) {
     error_log('Error MySQL: ' . $e->getMessage());
     http_response_code(500);
-    exit('No se pudo conectar con la base de datos de BarberPro.');
+    exit;
 }
