@@ -1,14 +1,21 @@
+
 <?php
 declare(strict_types=1);
 
-$host = 'localhost';
-$dbname = 'barberpro';
-$username = 'root';
-$password = '';
+$host = getenv('MYSQLHOST');
+$port = getenv('MYSQLPORT') ?: '3306';
+$dbname = getenv('MYSQLDATABASE');
+$username = getenv('MYSQLUSER');
+$password = getenv('MYSQLPASSWORD');
+
+if (!$host || !$dbname || !$username || $password === false) {
+    http_response_code(500);
+    exit('Faltan variables de conexión de MySQL en Railway.');
+}
 
 try {
     $pdo = new PDO(
-        "mysql:host={$host};dbname={$dbname};charset=utf8mb4",
+        "mysql:host={$host};port={$port};dbname={$dbname};charset=utf8mb4",
         $username,
         $password,
         [
@@ -18,6 +25,7 @@ try {
         ]
     );
 } catch (PDOException $e) {
+    error_log('Error de conexión MySQL: ' . $e->getMessage());
     http_response_code(500);
-    exit('No se pudo conectar con MySQL. Verifica que exista la base de datos barberpro y que MySQL esté iniciado en XAMPP.');
+    exit('No se pudo conectar con la base de datos de BarberPro.');
 }
