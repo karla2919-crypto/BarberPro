@@ -1,0 +1,23 @@
+BARBERPRO BETA - BARBERHOUSE
+=============================
+
+INSTALACIÓN EN XAMPP
+1. Copia la carpeta BarberPro dentro de C:\xampp\htdocs\
+2. Abre XAMPP e inicia Apache y MySQL.
+3. Entra a http://localhost/phpmyadmin
+4. Importa el archivo database/barberpro.sql
+5. Abre http://localhost/BarberPro/setup.php
+6. Crea la cuenta del dueño de BarberHouse.
+7. Inicia sesión en http://localhost/BarberPro/login.php
+
+IMPORTANTE
+- Configuración local por defecto: usuario MySQL root y contraseña vacía.
+- Si tu MySQL tiene contraseña, edita config/database.php.
+- Después de crear al dueño, elimina setup.php.
+- El registro público crea cuentas de cliente.
+- El dueño puede crear cuentas de barberos desde su panel.
+
+ESTADO DE ESTA ENTREGA
+Incluye conexión PDO, base de datos, registro/login, roles y panel inicial.
+La creación de citas y la gestión completa de servicios/galería se implementarán
+en los siguientes pasos. No se consideran todavía funciones terminadas.
