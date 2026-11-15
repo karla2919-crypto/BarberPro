@@ -1,6 +1,5 @@
 
 <?php
-declare(strict_types=1);
 
 $host = getenv('DB_HOST');
 $dbname = getenv('DB_NAME');
