@@ -2,15 +2,15 @@
 <?php
 declare(strict_types=1);
 
-$host = getenv('MYSQLHOST');
-$port = getenv('MYSQLPORT') ?: '3306';
-$dbname = getenv('MYSQLDATABASE');
-$username = getenv('MYSQLUSER');
-$password = getenv('MYSQLPASSWORD');
+$host = getenv('DB_HOST');
+$dbname = getenv('DB_NAME');
+$username = getenv('DB_USER');
+$password = getenv('DB_PASSWORD');
+$port = getenv('DB_PORT') ?: '3306';
 
 if (!$host || !$dbname || !$username || $password === false) {
     http_response_code(500);
-    exit('Faltan variables de conexión de MySQL en Railway.');
+    exit('Faltan variables de conexión en Railway.');
 }
 
 try {
@@ -24,8 +24,9 @@ try {
             PDO::ATTR_EMULATE_PREPARES => false,
         ]
     );
+
 } catch (PDOException $e) {
-    error_log('Error de conexión MySQL: ' . $e->getMessage());
+    error_log('Error MySQL: ' . $e->getMessage());
     http_response_code(500);
     exit('No se pudo conectar con la base de datos de BarberPro.');
 }
